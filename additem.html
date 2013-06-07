@@ -15,18 +15,21 @@ VFW 1306 /-->
     <meta name="viewport" content="target-densitydpi=device-dpi" />
     <meta name="HandheldFriendly" content="True" />
     <meta name="MobileOptimized" content="320" />
-    
-    
     <title>Add Your Next Game</title>
 </head>
-
 <body>
-    <h1>Add Your Next Game</h1>
+    <header>
+        <hgroup>    
+        <h1>Add Your Next Game</h1>
+        </hgroup>  
+    </header>
     <form action="#" method="post">
         <fieldset>
             <legend>Game Information</legend>
             <ul>
                 <li><label for="gameName">Game Name:</label><input type="text" id="gameName" /></li>
+                <li><label for="homeTeam">Home Team:</label><input type="text" id="homeTeam" /></li>
+                <li><label for="awayTeam">Away Team:</label><input type="text" id="awayTeam" /></li>
                 <li>
                     <label for="sportType">What Sport Is It?</label>
                     <select id="sportType">
@@ -49,17 +52,14 @@ VFW 1306 /-->
                 
                 <li><label for="priority">How Important Is This Game?</label> <input type="range" min="0" max="5" step="1" value="0" /> </li>
                 <li><label for="dateOfGame">What Is The Date Of This Game?</label> <input type="date" /></li>
-            
-            <li><input type="hidden" value="true" /></li>
-            
+                <li><label for="winningTeam">Who Do You Want To Win?</label><input type="text" id="winningTeam" /></li>
+                <li><input type="hidden" value="true" /></li>
             </ul>
             
         <input type="submit" value="Add Game to Watch List!" /input>   
         </fieldset>
-        
-        
+        <button id="clearData"> <a href="additem.html"> Clear Stored Data </a> </button>
+        <button id="displayData"> <a href=""> Display Data </a> </button>
     </form>
-
-
 </body>
 </html>
