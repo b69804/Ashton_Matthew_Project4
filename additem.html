@@ -46,17 +46,17 @@ VFW 1306 /-->
                 <li><label for="otherField">If Other, Please Describe Here:</label><textarea id="otherField"></textarea></li>
                 <li><label for="favTeam">Is Your Favorite Team Playing?</label>
                     <ul>
-                        <li><input type="radio" checked value="Yes" id="Yes" name="Yes" /><label for="Yes">Yes</label></li>
+                        <li><input type="radio" value="Yes" id="Yes" name="Yes" /><label for="Yes">Yes</label></li>
                         <li><input type="radio" value="No" id="No" name="No" /><label for="No">No</label></li>
                     </ul>
-                
+                </li>
                 <li><label for="priority">How Important Is This Game?</label> <input type="range" min="0" max="5" step="1" value="0" /> </li>
                 <li><label for="dateOfGame">What Is The Date Of This Game?</label> <input type="date" /></li>
                 <li><label for="winningTeam">Who Do You Want To Win?</label><input type="text" id="winningTeam" /></li>
-                <li><input type="hidden" value="true" /></li>
+                <li><input type="hidden" value="dateEntered" /></li>
             </ul>
             
-        <input type="submit" value="Add Game to Watch List!" /input>   
+        <input type="button" value="Add Game to Watch List!"/> 
         </fieldset>
         <button id="clearData"> <a href="additem.html"> Clear Stored Data </a> </button>
         <button id="displayData"> <a href=""> Display Data </a> </button>
