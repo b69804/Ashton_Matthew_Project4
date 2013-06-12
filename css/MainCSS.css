@@ -1,0 +1,43 @@
+/*
+ Matthew Ashton
+ Project 2
+ VFW 1306
+ CSS Style sheet for Web App
+ */
+
+
+
+body{
+    background: #F5DEB3;
+}
+
+
+h1 {
+    margin: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 5px;
+    border: 1px solid #B22222;
+    outline: double;
+    background: #D3D3D3;
+    overflow: scroll;
+    color: #B22222;
+    font-family: Tahoma, Geneva, sans-serif;
+    text-align: center;
+    letter-spacing: 1.5px;
+    line-height: 32px;
+}
+
+h3 {
+    height: 40px;
+    margin: 5px;
+    padding: 2px;
+    font-family: "Times New Roman", Times, serif;
+}
+
+a {
+    color: blue;
+}
+   
+a:hover{color:gray;}
+    
