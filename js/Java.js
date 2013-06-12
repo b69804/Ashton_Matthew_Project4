@@ -11,7 +11,7 @@ window.addEventListener("DOMContentLoaded", function(){
     
     function sportOption() {
         var formTag = document.getElementsByTagName("form"),
-            selectLi = getID("select"),
+            selectLi = $("select"),
             makeSelect = document.createElement("select");
             makeSelect.setAttribute("id", "groups");
         for (var i=0, j=sportTypes.length; i<j; i++) {
