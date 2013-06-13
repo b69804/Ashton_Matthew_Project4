@@ -27,23 +27,24 @@ window.addEventListener("DOMContentLoaded", function(){
     }
     
     function getFavTeam(){
-        if ($("Yes").checked) {
-            favValue = $("Yes").value;
-        }else{
-            favValue = "No"
+        var radioButton = document.forms[0].Yes;
+        for (var i=0; i<radioButton.length; i++) {
+            if (radioButton[i].checked) {
+                favValue = radioButton[i].value;
+            }
         }
     }
     
     function toggleControls(n){
         switch (n){ 
             case "on":
-                $("gameForm").style.display = "none"
+                $("gameForm").style.display = "none";
                 $("clearData").style.display = "inline";
                 $("displayData").style.display = "none";
                 $("addNewGame").style.display = "inline";
                 break;
             case "off":
-                $("gameForm").style.display = "block"
+                $("gameForm").style.display = "block";
                 $("clearData").style.display = "inline";
                 $("displayData").style.display = "inline";
                 $("addNewGame").style.display = "none";
@@ -56,17 +57,17 @@ window.addEventListener("DOMContentLoaded", function(){
     
     function addStuff() {
         var ID      = Math.floor(Math.random()*10000001);
-        
+        getFavTeam();
         var item    = {};
-            item.gameName       =["Name of Game", $("gameName").value];
-            item.homeTeam       =["Home Team", $("homeTeam").value];
-            item.awayTeam       =["Away Team", $("awayTeam").value];
-            item.group          =["Group", $("groups").value];
+            item.gameName       =["Name of Game:", $("gameName").value];
+            item.homeTeam       =["Home Team:", $("homeTeam").value];
+            item.awayTeam       =["Away Team:", $("awayTeam").value];
+            item.group          =["Group:", $("groups").value];
             item.other          =["Other:", $("otherField").value];
             item.favTeam        =["Favorite Team:", favValue];
-            item.priority       =["Game Priority", $("priority").value];
-            item.dateOfGame     =["Date of Game", $("dateOfGame").value];
-            item.winningTeam    =["Winning Team", $("winningTeam").value];
+            item.priority       =["Game Priority:", $("priority").value];
+            item.dateOfGame     =["Date of Game:", $("dateOfGame").value];
+            item.winningTeam    =["Winning Team:", $("winningTeam").value];
             
         localStorage.setItem(ID, JSON.stringify(item));
         alert("Game Saved!");
@@ -101,7 +102,7 @@ window.addEventListener("DOMContentLoaded", function(){
     
     function clearStuff(){
         if (localStorage.length === 0) {
-            alert("No data to clear!")
+            alert("No data to clear!");
         }else{
             localStorage.clear();
             alert("All games deleted!");
@@ -111,7 +112,7 @@ window.addEventListener("DOMContentLoaded", function(){
     }
     
     var sportTypes = ["--Sport Types--", "Football", "Basketball", "Soccer", "Baseball", "Hockey", "Other"],
-        favValue = "No";
+        favValue;
     sportOption();
 
     var displayData = $("displayData");

@@ -43,10 +43,10 @@ p {
 }
 
 a {
-    color: blue;
+    color: #B22222;
 }
    
-a:hover{color:gray;}
+a:hover{color:blue;}
 
 legend {
     color: #B22222;
@@ -68,11 +68,28 @@ li {
     font-family: "Times New Roman", Times, serif;
 }
 
+fieldset {
+    padding: 10px;
+    color: #000000;
+    
+}
+
 input {
-    color: blue;
+    color: #B22222;
+}
+
+
+    
+button {
+    margin: 10px;
+    color: #B22222;
+    background: #D3D3D3;
+    border: 1px solid #B22222;
+    outline: double;
 }
 
 input.hasFocus{
     border: 2px solid #B22222
 }
+
 
