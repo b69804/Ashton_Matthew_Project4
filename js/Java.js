@@ -6,7 +6,7 @@
 
 
 window.addEventListener("DOMContentLoaded", function(){
-    //I used easy because it helped me remeber that this is the easy way to get things from the HTML page.
+    //I used easy because it helped me remember that this is the easy way to get things from the HTML page.
     function easy(n){
         var getSomething = document.getElementById(n);
         return getSomething;
