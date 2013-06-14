@@ -6,15 +6,15 @@
 
 
 window.addEventListener("DOMContentLoaded", function(){
-    
-    function $(x){
-        var getSomething = document.getElementById(x);
+    //I used easy because it helped me remeber that this is the easy way to get things from the HTML page.
+    function easy(n){
+        var getSomething = document.getElementById(n);
         return getSomething;
     }
-    
+    // This is for the drop down menu function for which sport the game is for
     function sportOption() {
         var formTag = document.getElementsByTagName("form"),
-            selectLi = $("select"),
+            selectLi = easy("select"),
             makeSelect = document.createElement("select");
             makeSelect.setAttribute("id", "groups");
         for (var i=0, j=sportTypes.length; i<j; i++) {
@@ -26,7 +26,7 @@ window.addEventListener("DOMContentLoaded", function(){
         }
         selectLi.appendChild(makeSelect);
     }
-    
+    // This function is for getting the radio button value 
     function getFavTeam(){
         var radioButton = document.forms[0].Yes;
         for (var i=0; i<radioButton.length; i++) {
@@ -35,47 +35,47 @@ window.addEventListener("DOMContentLoaded", function(){
             }
         }
     }
-    
-    function toggleControls(n){
+    // This toggles the CSS to display certain things depending on what is clicked.
+    function togglePage(n){
         switch (n){ 
             case "on":
-                $("gameForm").style.display = "none";
-                $("clearData").style.display = "inline";
-                $("displayData").style.display = "none";
-                $("addNewGame").style.display = "inline";
+                easy("gameForm").style.display = "none";
+                easy("clearData").style.display = "inline";
+                easy("displayData").style.display = "none";
+                easy("addNewGame").style.display = "inline";
                 break;
             case "off":
-                $("gameForm").style.display = "block";
-                $("clearData").style.display = "inline";
-                $("displayData").style.display = "inline";
-                $("addNewGame").style.display = "none";
-                $("items").style.display = "none";
+                easy("gameForm").style.display = "block";
+                easy("clearData").style.display = "inline";
+                easy("displayData").style.display = "inline";
+                easy("addNewGame").style.display = "none";
+                easy("items").style.display = "none";
                 break;
             default:
                 return false;
         }
     }
-    
+    // This is the function for adding stuff to local storage. 
     function addStuff() {
         var ID      = Math.floor(Math.random()*10000001);
         getFavTeam();
         var item    = {};
-            item.gameName       =["Name of Game:", $("gameName").value];
-            item.homeTeam       =["Home Team:", $("homeTeam").value];
-            item.awayTeam       =["Away Team:", $("awayTeam").value];
-            item.group          =["Group:", $("groups").value];
-            item.other          =["Other:", $("otherField").value];
+            item.gameName       =["Name of Game:", easy("gameName").value];
+            item.homeTeam       =["Home Team:", easy("homeTeam").value];
+            item.awayTeam       =["Away Team:", easy("awayTeam").value];
+            item.group          =["Group:", easy("groups").value];
+            item.other          =["Other:", easy("otherField").value];
             item.favTeam        =["Favorite Team:", favValue];
-            item.priority       =["Game Priority:", $("priority").value];
-            item.dateOfGame     =["Date of Game:", $("dateOfGame").value];
-            item.winningTeam    =["Winning Team:", $("winningTeam").value];
+            item.priority       =["Game Priority:", easy("priority").value];
+            item.dateOfGame     =["Date of Game:", easy("dateOfGame").value];
+            item.winningTeam    =["Winning Team:", easy("winningTeam").value];
             
         localStorage.setItem(ID, JSON.stringify(item));
         alert("Game Saved!");
     }
-    
+    // This is the function for getting the stuff from local storage and displaying it as a list
     function getStuff(){
-        toggleControls("on");
+        togglePage("on");
         if (localStorage.length === 0) {
             alert("There is no data available.")
         }
@@ -100,7 +100,7 @@ window.addEventListener("DOMContentLoaded", function(){
             }
         }
     }
-    
+    // This clears the local storage of stuff
     function clearStuff(){
         if (localStorage.length === 0) {
             alert("No data to clear!");
@@ -116,11 +116,15 @@ window.addEventListener("DOMContentLoaded", function(){
         favValue;
     sportOption();
 
-    var displayData = $("displayData");
+    var displayData = easy("displayData");
     displayData.addEventListener("click", getStuff);
-    var clearData = $("clearData");
+    var clearData = easy("clearData");
     clearData.addEventListener("click", clearStuff);
-    var save = $("button");
+    var save = easy("button");
     save.addEventListener("click", addStuff);
     
 });
+
+// I purposefully used "stuff" in the function and variable names because it is an
+// easy way for me to remember what is happening.  It makes the code seem more general
+// which I feel will help me later on.  
