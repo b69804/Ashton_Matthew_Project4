@@ -1,5 +1,5 @@
 // Matthew Ashton
-// VFW Project 2
+// VFW Project 3
 // VFW 1306
 // JavaScript 
 
@@ -86,6 +86,7 @@ window.addEventListener("DOMContentLoaded", function(){
         document.body.appendChild(makeListOfStuff);
         for (var i=0, j=localStorage.length; i<j; i++) {
             var createList = document.createElement("li");
+            var linksLi = document.createElement("li");
             makeListOfStuff.appendChild(createList);
             var key = localStorage.key(i);
             var value = localStorage.getItem(key);
@@ -97,9 +98,59 @@ window.addEventListener("DOMContentLoaded", function(){
                 makeSubList.appendChild(makeSubli);
                 var subText = listObject[n][0]+" "+listObject[n][1];
                 makeSubli.innerHTML = subText;
+                makeSubli.appendChild(linksLi);
             }
+            createEditItemLinks(localStorage.key(i), linksLi);
         }
     }
+    
+    function createEditItemLinks(key) {
+        var editGameData = document.createElement('a');
+        editGameData.href = "#";
+        editGameData.key = key;
+        var editGameText = "Edit Game Data";
+        editGameText.addEventListener("click", editGameEntry);
+        editGameText.innerHTML = editGameText;
+        linksLi.appendChild(editGameText);
+        
+        var breakUpStuff = document.createElement('br');
+        linksLi.appendChild(breakUpStuff);
+        
+        var deleteGameData = document.createElement('a');
+        deleteGameData.href = "#";
+        deleteGameData.key = key;
+        var deleteGameText = "Delete Game";
+        deleteGameData.addEventListener("click", deleteGameEntry);
+        deleteGameData.innerHTML = deleteGameText;
+        linksLi.appendChild(deleteGameData);
+    }
+    
+    function editGameEntry() {
+        var value = localStorage.getItem(this.key);
+        var entry = JSON.parse(value);
+        
+        togglePage("off");
+        
+        easy("gameName").value = entry.gameName[1];
+        easy("homeTeam").value = entry.homeTeam[1];
+        easy("awayTeam").value = entry.awayTeam[1];
+        easy("group").value = entry.group[1];
+        easy("other").value = entry.other[1];
+        var favTeamButton = document.forms[0].Yes;
+        for (var i=0; i<favTeamButton.length; i++) {
+            if (favTeamButton[i].value == "Yes" && entry.favTeam[1] == "Yes") {
+                favTeamButton[i].setAttribute("checked", "checked");
+            }else if (favTeamButton[i].value == "No" && entry.favTeam[1] == "No") {
+                favTeamButton[i].setAttribute("checked", "checked");
+            }
+        }
+        easy("priority").value = entry.priority[1];
+        easy("dateOfGame").value = entry.dateOfGame[1];
+        easy("winningTeam").value = entry.winningTeam[1];
+        
+    }
+    
+    
     // This clears the local storage of stuff
     function clearStuff(){
         if (localStorage.length === 0) {
