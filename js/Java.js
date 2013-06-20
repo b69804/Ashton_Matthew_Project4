@@ -16,7 +16,7 @@ window.addEventListener("DOMContentLoaded", function(){
         var formTag = document.getElementsByTagName("form"),
             selectLi = easy("select"),
             makeSelect = document.createElement("select");
-            makeSelect.setAttribute("id", "groups");
+            makeSelect.setAttribute("ID", "groups");
         for (var i=0, j=sportTypes.length; i<j; i++) {
             var makeOption = document.createElement("option");
             var sportText = sportTypes[i];
@@ -56,8 +56,12 @@ window.addEventListener("DOMContentLoaded", function(){
         }
     }
     // This is the function for adding stuff to local storage. 
-    function addStuff() {
-        var ID      = Math.floor(Math.random()*10000001);
+    function addStuff(key) {
+        if (!key) {
+            var ID      = Math.floor(Math.random()*10000001);
+        }else{
+            ID = key;
+        }
         getFavTeam();
         var item    = {};
             item.gameName       =["Name of Game:", easy("gameName").value];
@@ -80,11 +84,12 @@ window.addEventListener("DOMContentLoaded", function(){
             alert("There is no data available.")
         }
         var makeStuff = document.createElement("div");
-        makeStuff.setAttribute("id", "items");
+        makeStuff.setAttribute("ID", "items");
         var makeListOfStuff = document.createElement("ul");
         makeStuff.appendChild(makeListOfStuff);
-        document.body.appendChild(makeListOfStuff);
-        for (var i=0, j=localStorage.length; i<j; i++) {
+        document.body.appendChild(makeStuff);
+        easy("items").style.display = "block";
+        for (var i=0, len=localStorage.length; i<len; i++) {
             var createList = document.createElement("li");
             var linksLi = document.createElement("li");
             makeListOfStuff.appendChild(createList);
@@ -104,14 +109,14 @@ window.addEventListener("DOMContentLoaded", function(){
         }
     }
     
-    function createEditItemLinks(key) {
+    function createEditItemLinks(key, linksLi) {
         var editGameData = document.createElement('a');
         editGameData.href = "#";
         editGameData.key = key;
         var editGameText = "Edit Game Data";
-        editGameText.addEventListener("click", editGameEntry);
-        editGameText.innerHTML = editGameText;
-        linksLi.appendChild(editGameText);
+        editGameData.addEventListener("click", editGameEntry);
+        editGameData.innerHTML = editGameText;
+        linksLi.appendChild(editGameData);
         
         var breakUpStuff = document.createElement('br');
         linksLi.appendChild(breakUpStuff);
@@ -134,8 +139,8 @@ window.addEventListener("DOMContentLoaded", function(){
         easy("gameName").value = entry.gameName[1];
         easy("homeTeam").value = entry.homeTeam[1];
         easy("awayTeam").value = entry.awayTeam[1];
-        easy("group").value = entry.group[1];
-        easy("other").value = entry.other[1];
+        easy("groups").value = entry.group[1];
+        easy("otherField").value = entry.other[1];
         var favTeamButton = document.forms[0].Yes;
         for (var i=0; i<favTeamButton.length; i++) {
             if (favTeamButton[i].value == "Yes" && entry.favTeam[1] == "Yes") {
@@ -148,6 +153,22 @@ window.addEventListener("DOMContentLoaded", function(){
         easy("dateOfGame").value = entry.dateOfGame[1];
         easy("winningTeam").value = entry.winningTeam[1];
         
+        save.removeEventListener("click", addStuff);
+        easy("button").value = "Edit Contact";
+        var editSubmit = easy("button");
+        editSubmit.addEventListener("click", validate);
+        editSubmit.key = this.key;
+        
+    }
+    
+    function deleteGameEntry() {
+        var ask = confirm("Are you absolutely sure you want to delete this game?");
+        if (ask) {
+            localStorage.removeItem(this.key)
+            window.location.reload();
+        }else{
+            alert("Game was NOT deleted!")
+        }
     }
     
     
@@ -163,8 +184,71 @@ window.addEventListener("DOMContentLoaded", function(){
         }
     }
     
+    function validate(e) {
+        var getGameName = easy("gameName");
+        var getHomeTeam = easy("homeTeam");
+        var getAwayTeam = easy("awayTeam");
+        var getGroup = easy("groups");
+        var getDateOfGame = easy("dateOfGame");
+        
+        errorMsg.innerHTML = "";
+            getGameName.style.border = "1px solid black";
+            getHomeTeam.style.border = "1px solid black";
+            getAwayTeam.style.border = "1px solid black";
+            getGroup.style.border = "1px solid black";
+            getDateOfGame.style.border = "1px solid black";
+        
+        var errorMessage = [];
+        
+        if (getGameName.value === "") {
+            var gameError = "Please Enter Game Title";
+            getGameName.style.border = "2px double red";
+            errorMessage.push(gameError);
+        }
+        
+        if (getHomeTeam.value === "") {
+            var homeTeamError = "Please Enter Home Team";
+            getHomeTeam.style.border = "2px double red";
+            errorMessage.push(homeTeamError);
+        }  
+        
+        if (getAwayTeam.value === "") {
+            var awayTeamError = "Please Enter Away Team";
+            getAwayTeam.style.border = "2px double red";
+            errorMessage.push(awayTeamError);
+        }   
+        
+        if (getGroup.value === "--Sport Types--") {
+            var groupError = "Please Select Sport Type";
+            getGroup.style.border = "2px double red";
+            errorMessage.push(groupError);
+        }
+        
+        if (getDateOfGame.value === "") {
+            var dateError = "Please Select Date Of Game";
+            getDateOfGame.style.border = "2px double red";
+            errorMessage.push(dateError);
+        }
+        
+        if (errorMessage.length >= 1) {
+            for (var i = 0, j=errorMessage.length; i < j; i++) {
+                var errorText = document.createElement("li");
+                errorText.innerHTML = errorMessage[i];
+                errorMsg.appendChild(errorText);
+            }
+            e.preventDefault();
+            return false;
+        }else{
+            addStuff(this.key);
+            
+        }
+        
+    }
+    
     var sportTypes = ["--Sport Types--", "Football", "Basketball", "Soccer", "Baseball", "Hockey", "Other"],
-        favValue;
+        favValue,
+        errorMsg = easy("errors");
+        
     sportOption();
 
     var displayData = easy("displayData");
@@ -172,7 +256,7 @@ window.addEventListener("DOMContentLoaded", function(){
     var clearData = easy("clearData");
     clearData.addEventListener("click", clearStuff);
     var save = easy("button");
-    save.addEventListener("click", addStuff);
+    save.addEventListener("click", validate);
     
 });
 
