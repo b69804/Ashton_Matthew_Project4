@@ -99,7 +99,7 @@ window.addEventListener("DOMContentLoaded", function(){
             var listObject = JSON.parse(value);
             var makeSubList = document.createElement("ul");
             createList.appendChild(makeSubList);
-            imageSelector(listObject.group[7], makeSubList);
+            imageSelector(listObject.group[1], makeSubList);
             for (var n in listObject){ 
                 var makeSubli = document.createElement("li");
                 makeSubList.appendChild(makeSubli);
@@ -118,6 +118,8 @@ window.addEventListener("DOMContentLoaded", function(){
         var newImage = document.createElement("img");
         var setSource = newImage.setAttribute("src", "img/"+ imgName + ".png");
         imageLi.appendChild(newImage);
+        newImage.style.border = "2px solid #B22222";
+        newImage.style.outline = "double #B22222";
     }
     
     
