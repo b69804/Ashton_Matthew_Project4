@@ -99,7 +99,7 @@ window.addEventListener("DOMContentLoaded", function(){
             var listObject = JSON.parse(value);
             var makeSubList = document.createElement("ul");
             createList.appendChild(makeSubList);
-            imageSelector(listObject.group[5], makeSubList);
+            imageSelector(listObject.group[7], makeSubList);
             for (var n in listObject){ 
                 var makeSubli = document.createElement("li");
                 makeSubList.appendChild(makeSubli);
@@ -265,7 +265,7 @@ window.addEventListener("DOMContentLoaded", function(){
         
     }
     
-    var sportTypes = ["--Sport Types--", "Football", "Basketball", "Soccer", "Baseball", "Hockey", "Other"],
+    var sportTypes = ["Football", "Basketball", "Soccer", "Baseball", "Hockey", "Other"],
         favValue,
         errorMsg = easy("errors");
         

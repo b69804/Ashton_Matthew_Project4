@@ -6,6 +6,7 @@
 
 var jsonObject = {
     "game1": {
+        "gameName": ["Name of Game:", "Revolution vs DC United"],
         "homeTeam": ["Home Team:", "Revolution"],
         "awayTeam": ["Away Team:", "DC United"],
         "group": ["Group:", "Soccer"],
@@ -16,6 +17,7 @@ var jsonObject = {
         "winningTeam": ["Winning Team:", "Revolution"]
     },
     "game2": {
+        "gameName": ["Name of Game:", "Angels vs Tigers"],
         "homeTeam": ["Home Team:", "Angels"],
         "awayTeam": ["Away Team:", "Tigers"],
         "group": ["Group:", "Baseball"],
@@ -26,6 +28,7 @@ var jsonObject = {
         "winningTeam": ["Winning Team:", "Tigers"]
     },
     "game3": {
+        "gameName": ["Name of Game:", "Spain vs Italy"],
         "homeTeam": ["Home Team:", "Spain"],
         "awayTeam": ["Away Team:", "Italy"],
         "group": ["Group:", "Soccer"],
