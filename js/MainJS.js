@@ -100,6 +100,7 @@ window.addEventListener("DOMContentLoaded", function(){
             var makeSubList = document.createElement("ul");
             createList.appendChild(makeSubList);
             imageSelector(listObject.group[1], makeSubList);
+            makeSubList.style.margin = "10px";
             for (var n in listObject){ 
                 var makeSubli = document.createElement("li");
                 makeSubList.appendChild(makeSubli);
@@ -120,6 +121,8 @@ window.addEventListener("DOMContentLoaded", function(){
         imageLi.appendChild(newImage);
         newImage.style.border = "2px solid #B22222";
         newImage.style.outline = "double #B22222";
+        newImage.style.margin = "5px";
+        newImage.style.padding = "2px";
     }
     
     
