@@ -1,5 +1,5 @@
 // Matthew Ashton
-// VFW Project 3
+// VFW Project 4
 // VFW 1306
 // JavaScript 
 
@@ -81,7 +81,8 @@ window.addEventListener("DOMContentLoaded", function(){
     function getStuff(){
         togglePage("on");
         if (localStorage.length === 0) {
-            alert("There is no data available.")
+            alert("There is no data available, default data is shown.")
+            testDataLoaded ();
         }
         var makeStuff = document.createElement("div");
         makeStuff.setAttribute("ID", "items");
@@ -98,6 +99,7 @@ window.addEventListener("DOMContentLoaded", function(){
             var listObject = JSON.parse(value);
             var makeSubList = document.createElement("ul");
             createList.appendChild(makeSubList);
+            imageSelector(listObject.group[5], makeSubList);
             for (var n in listObject){ 
                 var makeSubli = document.createElement("li");
                 makeSubList.appendChild(makeSubli);
@@ -108,6 +110,24 @@ window.addEventListener("DOMContentLoaded", function(){
             createEditItemLinks(localStorage.key(i), linksLi);
         }
     }
+    
+    
+    function imageSelector(imgName, makeSubList) {
+        var imageLi = document.createElement("li");
+        makeSubList.appendChild(imageLi);
+        var newImage = document.createElement("img");
+        var setSource = newImage.setAttribute("src", "img/"+ imgName + ".png");
+        imageLi.appendChild(newImage);
+    }
+    
+    
+    function testDataLoaded(){
+        for (var n in jsonObject) {
+            var id = Math.floor(Math.random()*10000001);
+            localStorage.setItem(id, JSON.stringify(jsonObject[n]));
+        }
+    }
+    
     
     function createEditItemLinks(key, linksLi) {
         var editGameData = document.createElement('a');
